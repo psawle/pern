@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
-
 import blog from "../models/blog.model.js";
 
 export const createBlog = async (req,res) => {
     const blogDetails = {
         title : req.body?.title,
-        image : req.body?.image,
-        caption : req.body?.caption
+        caption : req.body?.caption,
+        image: {
+          url: req.body?.url,
+          fileId: req.body?.fileId,
+        },        
 }
-
     const blogcreated = await blog.create(blogDetails)
     if(blogcreated){
         res.status(201).json({
@@ -20,8 +21,107 @@ export const createBlog = async (req,res) => {
             message: "error creating blog"
         })
     }
-    
 }
+
+export const getAllBlog = async (req,res) => {
+    const listOfBlog = await blog.find();
+    console.log("listOfBlog",listOfBlog);
+    if(!listOfBlog){
+        res.status(400).json({
+            message : "no data to show"
+        })
+    } else {
+        res.status(200).json({
+            message: "list of all blog",
+            data : listOfBlog
+        })
+    }
+}
+
+
+// export const updateBlog = async (req,res) => {
+//     const {id} = req.body;
+//     if(!id){
+//         res.status(400).json({
+//             message: "id is not present",
+//         })
+//     } else {
+
+//     }
+// }
+
+export const deleteBlog = async (req,res) => {
+    const {id} = req.params;
+    if(!id) {
+        res.status(400).json({
+            message : "Is is not present"
+        })
+    } else {
+        const deleteItem = await blog.findByIdAndDelete(id);
+        if(!deleteItem){
+            res.status(400).json({
+                message : "internal server error"
+            })
+        } else {
+            res.status(200).json({
+                message : "blog deleted successfully",
+                data : deleteItem
+            })
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // import mongoose from "mongoose";

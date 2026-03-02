@@ -14,11 +14,11 @@ const blogSchema = new mongoose.Schema({
     image: {
   url: {
     type: String,
-    required: true
+    // required: true
   },
   fileId: {
     type: String,
-    required: true
+    // required: true
   }
 }
 })
