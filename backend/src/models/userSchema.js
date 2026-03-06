@@ -7,7 +7,15 @@ const userScehma = new Schema({
      role :{ type :String }
 },{
     timestamps :true
- })
+ },)
+ 
+ userScehma.methods.generateToken = function () {
+     return jwt.sign(
+       { id: this._id },
+       process.env.JWT_SECRET,
+       { expiresIn: process.env.JWT_EXPIRE }
+     );
+   };
 
  const User = model("user",userScehma);
 

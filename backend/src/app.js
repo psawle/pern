@@ -27,7 +27,7 @@ app.use(express.urlencoded({extended :true})); // extended:true is used for pars
 
 app.all("/",(req,res) => { res.send("working fine health is good")})
 
-app.use("/api/v1/auth/register",authRoutes)
+app.use("/api/v1/auth",authRoutes)
 app.use("/api/v1/users",userRouter)
 app.use("/api/v1/blog",blogRouter);
 
