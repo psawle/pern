@@ -38,17 +38,40 @@ export const getAllBlog = async (req,res) => {
     }
 }
 
+export const getBlogById = async (req,res) => {
+    const {id} = req.params;
 
-// export const updateBlog = async (req,res) => {
-//     const {id} = req.body;
-//     if(!id){
-//         res.status(400).json({
-//             message: "id is not present",
-//         })
-//     } else {
+    if(!id){
+        res.status(400).json({
+            message : "id not present"
+        })
+    } else {
+        const singleblog = await blog.findById(id);
+        res.status(200).json({
+            message:"blog details",
+            data : singleblog
+        })
+    }
+}
 
-//     }
-// }
+export const updateBlog = async (req,res) => {
+    const {id} = req.params;
+    const newTitle  = req.body.title;
+    const newCaption = req.body.caption;
+    if(!id){
+        res.status(400).json({
+            message: "id is not present",
+        })
+    } else {
+        const updatedBlog = await blog.findByIdAndUpdate(id,{title :newTitle,caption : newCaption},{
+            new: true,
+          })
+        res.status(200).json({
+            message: "blog updated successfully",
+            data : updatedBlog
+        })
+    }
+}
 
 export const deleteBlog = async (req,res) => {
     const {id} = req.params;
