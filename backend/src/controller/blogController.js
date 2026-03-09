@@ -25,7 +25,7 @@ export const createBlog = async (req,res) => {
 
 export const getAllBlog = async (req,res) => {
     const listOfBlog = await blog.find();
-    console.log("listOfBlog",listOfBlog);
+     console.log("listOfBlog",req.user);
     if(!listOfBlog){
         res.status(400).json({
             message : "no data to show"
