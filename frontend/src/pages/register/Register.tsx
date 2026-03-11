@@ -15,20 +15,17 @@ const Register = () => {
     role: "user",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    setFormData({
-      ...formData,
+  const handleChange = ( e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData({...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/register", {
+      const res = await fetch("http://localhost:3000/api/v1/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
