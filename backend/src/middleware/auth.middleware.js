@@ -3,7 +3,7 @@ import User from "../models/userSchema.js";
 
 export const authMiddleware = async (req,res,next) => {
      const {authorization} = req.headers;
-     const token = authorization.split(" ")[1]
+     const token = authorization?.split(" ")[1]
     console.log("Authorization",authorization)
     if(!authorization){
         res.status(400).json({
@@ -14,7 +14,7 @@ export const authMiddleware = async (req,res,next) => {
    console.log(decodedToken,"decodedToken")
 
    const user = await User.findById(decodedToken?.id)
-   console.log("UU",user)
+   console.log("Userrr",user)
    req.user = user;
   next();
 }

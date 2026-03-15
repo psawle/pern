@@ -19,6 +19,7 @@ import express from "express";
 import userRouter from "./routes/userRoutes.js";
 import blogRouter from "./routes/blogRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import userPostRouter from "./routes/userPostRoute.js";
 
 const app = express();
 app.use(express.json({limit : "20kb"})); // limit is used for limiti the request body size to secure our server from crashing
@@ -30,5 +31,6 @@ app.all("/",(req,res) => { res.send("working fine health is good")})
 app.use("/api/v1/auth",authRoutes)
 app.use("/api/v1/users",userRouter)
 app.use("/api/v1/blog",blogRouter);
+app.use("/api/v1/post",userPostRouter);
 
 export default app;

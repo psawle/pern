@@ -1,6 +1,7 @@
-import mongoose, { model } from "mongoose";
+import mongoose from "mongoose";
+// import User from "./userSchema.js";
 
-const blogSchema = new mongoose.Schema({
+const postSchema = new mongoose.Schema({
     title :{
         type : String,
         // required : true,
@@ -19,16 +20,13 @@ const blogSchema = new mongoose.Schema({
   fileId: {
     type: String,
     // required: true
+  },
+  userId: {
+    type : mongoose.Schema.Types.ObjectId,
+    ref : "user",
+    required : true
   }
-
-},
-userId: {
-  type : mongoose.Schema.Types.ObjectId,
-  ref : "user",
-  required : [true,"user id isss missing"]
 }
 })
 
-const blog = model("blog",blogSchema)
-
-export default blog;
+export default postSchema;

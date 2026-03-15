@@ -2,13 +2,15 @@ import mongoose from "mongoose";
 import blog from "../models/blog.model.js";
 
 export const createBlog = async (req,res) => {
+    console.log("user in controller",req.user)
     const blogDetails = {
         title : req.body?.title,
         caption : req.body?.caption,
         image: {
           url: req.body?.url,
           fileId: req.body?.fileId,
-        },        
+        },
+        userId : req.user._id      
 }
     const blogcreated = await blog.create(blogDetails)
     if(blogcreated){
@@ -24,7 +26,7 @@ export const createBlog = async (req,res) => {
 }
 
 export const getAllBlog = async (req,res) => {
-    const listOfBlog = await blog.find();
+    const listOfBlog = await blog.find({userId: req.user._id}).populate("userId","name email");
      console.log("listOfBlog",req.user);
     if(!listOfBlog){
         res.status(400).json({
