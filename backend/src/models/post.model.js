@@ -1,7 +1,6 @@
-import mongoose from "mongoose";
-// import User from "./userSchema.js";
+import mongoose, { model } from "mongoose";
 
-const postSchema = new mongoose.Schema({
+const post = new mongoose.Schema({
     title :{
         type : String,
         // required : true,
@@ -21,12 +20,14 @@ const postSchema = new mongoose.Schema({
     type: String,
     // required: true
   },
-  userId: {
+  user: {
     type : mongoose.Schema.Types.ObjectId,
     ref : "user",
-    required : true
+    // required : true
   }
 }
 })
+
+const postSchema = model("post",post)
 
 export default postSchema;

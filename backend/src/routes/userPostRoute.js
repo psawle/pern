@@ -1,30 +1,12 @@
 import {Router} from "express";
-import postSchema from "../models/post.model.js";
-
+import { authMiddleware } from "../middleware/auth.middleware.js";
+import { createPost } from "../controller/postController.js";
+import multer from "multer";
 
 const userPostRouter = Router();
+const upload = multer({storage: multer.memoryStorage()});
 
-userPostRouter.route("/").post(async (req,res) => {
-    const {image_Url} = req?.body
-
-    if(!image_Url){
-        return res.status(401).json({
-            message : "imahe ur is missing"
-        })
-    }
-
-    const payload = {
-        title : req.body?.title,
-        caption : req.body?.caption,
-        image  : req.body?.image
-    }
-    const postCreated = await postSchema.create();
-
-    res.status(200).json({
-        message: "post created successfully",
-        data : postCreated
-    })
-})
+userPostRouter.route("/").post(authMiddleware,upload.single("image"),createPost);
 
 
 export default userPostRouter;
