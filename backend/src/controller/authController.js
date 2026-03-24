@@ -34,16 +34,17 @@ export const userLogin = async (req,res) => {
  
    try {
      const userDetails = await User.findOne({email});
-
+  console.log("userDetails",userDetails)
     let isPassword = bcrypt.compareSync(password,userDetails?.password)
-     if(isPassword){
-        const token =  await userDetails.generateToken(userDetails?._id);
+     if(!isPassword){
+        return res.status(400).json({ message : "invalid password " })
+     } 
+     const token =  await userDetails.generateToken(userDetails?._id);
         console.log("token",token);
         return res.status(200).json({
              message : "login successfull",
              token,
          })
-     } 
    } catch (error) {
     console.log(error)
     res.status(400).json({ message : "user not found " })

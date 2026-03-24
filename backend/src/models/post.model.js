@@ -1,6 +1,6 @@
 import mongoose, { model } from "mongoose";
 
-const blogSchema = new mongoose.Schema({
+const post = new mongoose.Schema({
     title :{
         type : String,
         // required : true,
@@ -19,16 +19,15 @@ const blogSchema = new mongoose.Schema({
   fileId: {
     type: String,
     // required: true
-  }
-
+  },
 },
-userId: {
+user: {
   type : mongoose.Schema.Types.ObjectId,
   ref : "user",
-  required : [true,"user id isss missing"]
+  // required : true
 }
 })
 
-const blog = model("blog",blogSchema)
+const postSchema = model("post",post)
 
-export default blog;
+export default postSchema;

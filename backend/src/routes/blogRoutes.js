@@ -4,8 +4,8 @@ import { authMiddleware } from "../middleware/auth.middleware.js";
 
 const blogRouter = Router();
 
-blogRouter.route("/").post(createBlog).get(authMiddleware,getAllBlog);
+blogRouter.route("/").post(authMiddleware,createBlog).get(authMiddleware,getAllBlog);
 
-blogRouter.route("/:id").delete(deleteBlog).get(getBlogById).put(updateBlog);
+blogRouter.route("/:id").delete(authMiddleware,deleteBlog).get(authMiddleware,getBlogById).put(authMiddleware,updateBlog);
 
 export default blogRouter;
