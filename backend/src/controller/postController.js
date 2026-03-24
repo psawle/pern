@@ -3,7 +3,6 @@ import { generateCaption } from "../service/ai.service.js";
 import uploadImage from "../service/storage.service.js";
 
 export const createPost = async (req,res) => {
-    console.log("sdjjdjjjjj",req?.file)
 try {
     if(!req.file){
         return res.status(401).json({ message : "image url is missing"})
@@ -13,7 +12,6 @@ try {
     const caption = await generateCaption(req.file,base64Image)
 
     const imageUrl = await uploadImage(req.file.buffer,req.file?.originalname)
-     console.log("image repon",imageUrl)
 
     const postCreated = await postSchema.create({
         image  : imageUrl,
@@ -39,4 +37,35 @@ try {
         data : error
     })
 }
+}
+
+export const deletePost = async (req,res) => {
+
+}
+
+export const getpost = async (req,res) => {
+
+}
+
+export const updatePost = async (req,res) => {
+
+}
+
+export const getAllPost = async (req,res) => {
+
+   try {
+    const response = await postSchema.find()
+    if(!res){
+        return res.status(400).json({
+            message : "no data to show"
+        })
+    }
+    res.status(200).json({
+        message : "list of all data",
+        data : response
+    })
+   } catch (error) {
+    console.log("error from catch",error)
+   }
+
 }
