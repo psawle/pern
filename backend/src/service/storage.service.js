@@ -7,8 +7,35 @@ const imagekit = new ImageKit({
 });
 
 const uploadImage = async  (file,fileName) => {
-  const imageResponse = await imagekit.upload({file, fileName})
-  return imageResponse
+  try {
+    if (!file) {
+      throw new Error("File is required for upload");
+    }
+
+    if (!fileName) {
+      throw new Error("File name is required");
+    }
+
+    const options = {
+      file,
+      fileName,
+      folder,
+      useUniqueFileName: true,
+    };
+
+    const response = await imagekit.upload(options);
+
+    return {
+      url: response.url,
+      fileId: response.fileId,
+      name: response.name,
+      size: response.size,
+    };
+
+  } catch (error) {
+    console.error("Image upload failed:", error.message);
+    throw new Error("Image upload failed. Please try again.");
+  }
 }
 
 

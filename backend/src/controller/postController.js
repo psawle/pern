@@ -40,19 +40,64 @@ try {
 }
 
 export const deletePost = async (req,res) => {
-
+    try {
+    const {id} = req.params
+    if(!id){
+       return res.status(401).json({
+            message:"id is missing"
+        })
+    }
+    const response = await postSchema.findByIdAndDelete(id)
+    return res.status(200).json({
+        message: "post deleted",
+        data : response
+    })     
+    } catch (error) {
+        console.log("error from catch",error)
+    }
 }
 
 export const getpost = async (req,res) => {
+   const {id} = req.params;
 
+   if(!id){
+    return res.status(400).json({
+        message : "id not found",
+    })
+   }
+
+   const response = await postSchema.findById(id)
+   if(!response){
+    return res.status(400).json({
+        message : "something went wrong"
+     })
+   }
+  return res.status(200).json({
+    message : "post details",
+    data : response
+  })
 }
 
 export const updatePost = async (req,res) => {
+    try {
+        const {id} = req.params;
+        if(!id){
+          return res.status(401).json({
+            message : "id not found"
+           })
+        }
+        const data = await postSchema.findOneAndUpdate({id})
+        return res.status(200).json({
+            message : "post is updated",
+            data : data
+        })
+    } catch (error) {
+        console.log("error from catch",error)
+    }
 
 }
 
 export const getAllPost = async (req,res) => {
-
    try {
     const response = await postSchema.find()
     if(!res){
@@ -67,5 +112,4 @@ export const getAllPost = async (req,res) => {
    } catch (error) {
     console.log("error from catch",error)
    }
-
 }
