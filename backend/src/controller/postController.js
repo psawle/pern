@@ -68,8 +68,8 @@ export const getpost = async (req,res) => {
 
    const response = await postSchema.findById(id)
    if(!response){
-    return res.status(400).json({
-        message : "something went wrong"
+    return res.status(404).json({
+        message : "post not found"
      })
    }
   return res.status(200).json({
