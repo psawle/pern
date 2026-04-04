@@ -8,6 +8,6 @@ const upload = multer({storage: multer.memoryStorage()});
 
 userPostRouter.route("/").post(authMiddleware,upload.single("image"),createPost).get(authMiddleware,getAllPost);
 
-userPostRouter.route("/:id").put(authMiddleware,updatePost).get(authMiddleware,getpost).delete(authMiddleware,deletePost)
+userPostRouter.route("/:id").put(authMiddleware, upload.single("image"),updatePost).get(authMiddleware,getpost).delete(authMiddleware,deletePost)
 
 export default userPostRouter;

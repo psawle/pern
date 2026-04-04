@@ -54,11 +54,15 @@ export const deletePost = async (req,res) => {
     })     
     } catch (error) {
         console.log("error from catch",error)
+        return res.status(401).json({
+            message : "internal server error"
+        })
     }
 }
 
 export const getpost = async (req,res) => {
-   const {id} = req.params;
+   try {
+    const {id} = req.params;
 
    if(!id){
     return res.status(400).json({
@@ -76,23 +80,43 @@ export const getpost = async (req,res) => {
     message : "post details",
     data : response
   })
+    
+   } catch (error) {
+    return res.status(401).json({
+        message : "internal server error"
+    })
+   }
 }
 
 export const updatePost = async (req,res) => {
     try {
         const {id} = req.params;
+        const  caption = req.body?.caption;
+        const image = req.body?.image
+        console.log("req.body",req.body)
         if(!id){
           return res.status(401).json({
             message : "id not found"
            })
         }
-        const data = await postSchema.findOneAndUpdate({id})
-        return res.status(200).json({
-            message : "post is updated",
-            data : data
-        })
+        const data = await postSchema.findByIdAndUpdate(id,{caption:caption,image:image},{new : true})
+        console.log("data",data)
+        if(!data){
+            res.status.json({
+                message : "internal server error",
+                data : data
+            })
+        } else {
+            return res.status(200).json({
+                message : "post is updated",
+                data : data
+            })
+        }
     } catch (error) {
         console.log("error from catch",error)
+       return res.status(401).json({
+            message : "internal server error"
+        })
     }
 
 }
@@ -111,5 +135,8 @@ export const getAllPost = async (req,res) => {
     })
    } catch (error) {
     console.log("error from catch",error)
+   return res.status(401).json({
+        message : "internal server error"
+    })
    }
 }
