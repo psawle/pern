@@ -6,7 +6,6 @@ import { createServer } from 'node:http';
 const server = createServer(app);
 const io = new Server(server);
 
-
 io.on('connection', (socket) => {
     console.log('a socket connected');
   });

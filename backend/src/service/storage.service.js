@@ -19,7 +19,7 @@ const uploadImage = async  (file,fileName) => {
     const options = {
       file,
       fileName,
-      folder,
+      // folder,
       useUniqueFileName: true,
     };
 

@@ -20,8 +20,10 @@ import userRouter from "./routes/userRoutes.js";
 import blogRouter from "./routes/blogRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import userPostRouter from "./routes/userPostRoute.js";
+import cors from "cors";
 
 const app = express();
+app.use(cors())
 app.use(express.json({limit : "20kb"})); // limit is used for limiti the request body size to secure our server from crashing
 app.use(express.urlencoded({extended :true})); // extended:true is used for parsing the urlsncoded data with the querystring library and it allows us to parse nested objects in the request body
 // app.use(resquestLogger())
