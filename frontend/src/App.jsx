@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import instance from './api/axiosConfig'
+import { asyncGetUser } from './store/userAction';
 
 function App() {
   const [userData,setUserData] = useState([])
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const getUser = async () => {
+   useEffect( async () => {
     try {
-      const res = await instance.get("/users");
-    setUserData(res)
+      setLoading(true)
+      const res = await asyncGetUser();
+      setUserData(res?.data) 
     } catch (error) {
-      setError(error.message)
-    } finally{
+      setError("error",error.message)
+    }
+    finally {
       setLoading(false)
     }
-    
-  }
-
-   useEffect(() => {
-    getUser();
+   
   },[])
+
   return (
     <>
     <h1 className='text-3xl font-bold underline'>Helloworld</h1>
@@ -29,7 +29,7 @@ function App() {
     {error && <p>{error}</p>}
     {userData.length > 0 ? userData.map((item) => (
      <div className=''>
-      <h1>{item.name}</h1>
+      <h1>{item.username}</h1>
      </div>
     )) : "No user found"}
     </>
