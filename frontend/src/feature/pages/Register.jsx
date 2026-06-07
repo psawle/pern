@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { registerSchema } from "../../schemas/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { nanoid } from "zod";
+import { asyncUserRegister } from "../../store/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
   const {
@@ -11,9 +14,11 @@ const Register = () => {
   } = useForm({
     resolver: zodResolver(registerSchema),
   });
-
-  const onSubmit = (data) => {
-    console.log(data);
+  const dispatch = useDispatch()
+  const onSubmit = (user) => {
+    user.id = nanoid();
+    console.log(user);
+    dispatch(asyncUserRegister(user));
   };
 
   return (

@@ -9,7 +9,7 @@ function App() {
     <>
      <div>
      <Nav/>
-     {/* <Public/> */}
+     <Public/>
      </div>
     </>
   )
