@@ -2,18 +2,15 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "../../schemas/loginSchema.js";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { loginUser } from "../../store/actions/userActions.jsx";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(loginSchema),
-  });
-
-  const onSubmit = (data) => {
-    console.log(data);
+  const { register, handleSubmit, formState: { errors } } = useForm({resolver: zodResolver(loginSchema)});
+  const dispatch = useDispatch()
+  const onSubmit = (user) => {
+    console.log(user);
+     dispatch(loginUser(user))
   };
 
   return (

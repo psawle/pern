@@ -1,6 +1,6 @@
 
 import './App.css'
-import Nav from './components/Nav'
+import Navbar from './components/layout/Navbar'
 import Public from './routes/Public'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
      <div>
-     <Nav/>
+     <Navbar/>
      <Public/>
      </div>
     </>

@@ -7,13 +7,7 @@ import { asyncUserRegister } from "../../store/actions/userActions";
 import { useDispatch } from "react-redux";
 
 const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(registerSchema),
-  });
+  const { register, handleSubmit,formState: { errors },} = useForm({ resolver: zodResolver(registerSchema),});
   const dispatch = useDispatch()
   const onSubmit = (user) => {
     user.id = nanoid();

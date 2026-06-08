@@ -196,3 +196,21 @@ ol {
 .text-muted {
   color: var(--muted);
 }
+
+:root {
+  --primary: #4338ca;
+  --primary-hover: #3730a3;
+
+  --secondary: #f8fafc;
+
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+
+  --border-color: #e5e7eb;
+
+  --bg-color: #f9fafb;
+
+  --white: #ffffff;
+
+  --radius: 12px;
+}
