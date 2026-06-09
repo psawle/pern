@@ -2,8 +2,10 @@ import Navbar from "../../../components/layout/Navbar";
 import Input from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
 import Checkbox from "../../../components/common/Checkbox";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate()
   return (
     <>
       <Navbar />
@@ -70,6 +72,7 @@ const Register = () => {
           <p className="text-center mt-6">
             Already have an account?
             <span
+            onClick={() => navigate("/")}
               className="
               text-[var(--primary)]
               font-semibold

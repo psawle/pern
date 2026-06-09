@@ -4,7 +4,22 @@ import Button from "../../../components/common/Button";
 import Divider from "../../../components/common/Divider";
 import Checkbox from "../../../components/common/Checkbox";
 
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "../../../schemas/loginSchema";
+
 const Login = () => {
+  const navigate = useNavigate();
+  const {register,handleSubmit , formState : {errors}} = useForm({resolver :zodResolver(loginSchema)})
+
+  const onSubmit = (user) => {
+   console.log(user);
+  }
+
+  const handleChange = (e) => {
+     console.log("EEEEEE",e.target.value)
+  }
   return (
     <>
       <Navbar />
@@ -68,20 +83,37 @@ const Login = () => {
 
           <Divider />
 
-          <form className="space-y-5 mt-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 mt-6">
+            <div>
             <Input
+              error={errors.email?.message}
+              {...register("email")}
               label="Email"
               type="email"
             />
-
+             {/* {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )} */}
+            </div>
+            <div>
             <Input
               label="Password"
               type="password"
+              error={errors.password?.message}
+              {...register("password")}
             />
-
+            {/* {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )} */}
+           </div>
+{/* 
             <Checkbox
               label="Remember me for 30 days"
-            />
+            /> */}
 
             <Button type="submit">
               Login
@@ -90,7 +122,7 @@ const Login = () => {
 
           <p className="text-center mt-6">
             Don't have an account?
-            <span
+            <span onClick={() => navigate("/register")}
               className="
               text-[var(--primary)]
               font-semibold
