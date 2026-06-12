@@ -5,7 +5,7 @@ export const asyncUserRegister = (user) => async (dispatch, getState) => {
    try {
       const res = await instance.post("/users",user);
       console.log("response : ",res)
-      
+      return res;
    } catch (error) {
     console.log("error",error)
    }
@@ -22,6 +22,7 @@ export const loginUser = (user) => async (dispatch,getState) => {
          },
        });
        console.log("ressss",res)
+       return res;
    } catch (error) {
        
    }

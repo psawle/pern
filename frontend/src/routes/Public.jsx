@@ -10,7 +10,7 @@ import Register from '../feature/auth/pages/Register'
 const Public = () => {
   return (
    <Routes>
-    {/* <Route path='/' element={<Home/>} /> */}
+    <Route path='/dashboard' element={<Home/>} />
     {/* <Route path='/products' element={<Product/>} /> */}
     {/* <Route path='/login' element={<Login/>} /> */}
     {/* <Route path='/register' element={<Register/>} /> */}

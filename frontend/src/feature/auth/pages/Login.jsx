@@ -8,18 +8,19 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../../schemas/loginSchema";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../store/actions/userActions";
 
 const Login = () => {
   const navigate = useNavigate();
   const {register,handleSubmit , formState : {errors}} = useForm({resolver :zodResolver(loginSchema)})
-
-  const onSubmit = (user) => {
+  const dispatch = useDispatch();
+  const onSubmit = async (user) => {
    console.log(user);
+   const reslogin = await loginUser(user);
+   console.log("reslogin",reslogin)
   }
 
-  const handleChange = (e) => {
-     console.log("EEEEEE",e.target.value)
-  }
   return (
     <>
       <Navbar />

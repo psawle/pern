@@ -3,9 +3,26 @@ import Input from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
 import Checkbox from "../../../components/common/Checkbox";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema } from "../../../schemas/registerSchema";
+import { asyncUserRegister } from "../../../store/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const {register, handleSubmit, formState : {errors}} = useForm({resolver : zodResolver(registerSchema)});
+  const dispatch = useDispatch()
+  const onSubmit = (user) =>{
+     console.log("userlll",user)
+     const res =  dispatch(asyncUserRegister(user))
+     console.log("res in register",res)
+     if(res){
+      navigate("/dashboard")
+     } else {
+      navigate("/");
+     }
+  }
   return (
     <>
       <Navbar />
@@ -45,24 +62,32 @@ const Register = () => {
             Join LuxeCommerce for premium shopping
           </p>
 
-          <form className="space-y-5">
-            <Input label="Full Name" />
+          <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+            <Input label="Full Name"
+            error={errors.name?.message}
+            {...register("name")} />
 
             <Input
               label="Email Address"
               type="email"
+              error={errors.email?.message}
+              {...register("email")}
             />
-
-            <Input label="Mobile Number" />
+{/* 
+            <Input label="Mobile Number"
+             error={errors.mobile?.message}
+             {...register("mobile")} /> */}
 
             <Input
               label="Password"
               type="password"
+              error={errors.password?.message}
+              {...register("password")}
             />
 
-            <Checkbox
+            {/* <Checkbox
               label="I agree to Terms & Conditions"
-            />
+            /> */}
 
             <Button type="submit">
               Create Account →
