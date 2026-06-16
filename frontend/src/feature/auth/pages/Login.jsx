@@ -140,3 +140,24 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+
+
+
+// const onSubmit = async (credentials) => {
+//   try {
+//     const { data } = await axiosConfig.get(`/users?email=${credentials.email}`);
+//     const found = data[0];
+
+//     if (found && found.password === credentials.password) {
+//       dispatch(setUser(found));
+//       navigate("/dashboard");
+//     } else {
+//       toast.error("Invalid email or password");
+//     }
+//   } catch (err) {
+//     toast.error("Something went wrong");
+//   }
+// };
