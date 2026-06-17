@@ -15,7 +15,7 @@ export const asyncUserRegister = (user) => async (dispatch, getState) => {
 export const loginUser = (user) => async (dispatch,getState) => {
    try {
       //  const res = await instance.get(`/users?email=${user?.email}&password=${user?.password}`)
-      const res = await instance.get("/users", {
+      const res = await instance.get(`/users?email=${user.email}`, {
          params: {
            email: user.email.trim(),
            password: user.password.trim(),
