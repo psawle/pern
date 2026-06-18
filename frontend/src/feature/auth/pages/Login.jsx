@@ -17,7 +17,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const onSubmit = async (user) => {
    console.log(user);
-   const reslogin = await loginUser(user);
+   const reslogin = await dispatch(loginUser(user));
    console.log("reslogin",reslogin)
   }
 

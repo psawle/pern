@@ -15,13 +15,19 @@ const Register = () => {
   const dispatch = useDispatch()
   const onSubmit = (user) =>{
      console.log("userlll",user)
-     const res =  dispatch(asyncUserRegister(user))
-     console.log("res in register",res)
-     if(res){
-      navigate("/dashboard")
-     } else {
-      navigate("/");
+     try {
+      const res =  dispatch(asyncUserRegister(user))
+      console.log("res in register",res)
+      if(res){
+       navigate("/dashboard")
+      } else {
+       navigate("/");
+      }
+      
+     } catch (error) {
+      
      }
+    
   }
   return (
     <>
