@@ -114,32 +114,3 @@ const Register = () => {
 };
 
 export default Register;
-
-
-
-
-
-
-
-// import { setUser } from "../../../store/reducers/userSlice";
-// import axiosConfig from "../../../api/axiosConfig";
-// import { useDispatch } from "react-redux";
-// import { toast } from "react-toastify";
-
-// const dispatch = useDispatch();
-
-// const onSubmit = async (user) => {
-//   try {
-//     // 1. component calls the API directly
-//     const { data } = await axiosConfig.post("/users", user);
-
-//     // 2. success → put the user into Redux
-//     dispatch(setUser(data));
-
-//     // 3. UI reaction lives in the component, not Redux
-//     navigate("/dashboard");
-//   } catch (err) {
-//     // 4. failure → show error, do NOT navigate
-//     toast.error("Registration failed. Try again.");
-//   }
-// };
