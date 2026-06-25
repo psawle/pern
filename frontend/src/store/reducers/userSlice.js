@@ -12,10 +12,32 @@ const userSlice = createSlice({
               state.userData = action.payload
         }
     }
+    // extraReducers : (builder) => {
+    //     builder.addCase("user/register/fulfilled",(state,action) => {
+    //         state.userData = action.payload
+    //     })
+    // }
 })
 
 export default userSlice.reducer;
 export const {loadusers} = userSlice.actions;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

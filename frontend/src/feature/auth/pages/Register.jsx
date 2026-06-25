@@ -25,7 +25,7 @@ const Register = () => {
       }
       
      } catch (error) {
-      
+      console.log("error in register",error)
      }
     
   }
@@ -33,42 +33,11 @@ const Register = () => {
     <>
       <Navbar />
 
-      <div
-        className="
-        min-h-[calc(100vh-64px)]
-        bg-gray-50
-        flex
-        justify-center
-        items-center
-        px-4
-      "
-      >
-        <div
-          className="
-          bg-white
-          rounded-xl
-          shadow-md
-          p-8
-          w-full
-          max-w-md
-        "
-        >
-          <h1 className="text-4xl font-bold text-center">
-            Create an Account
-          </h1>
-
-          <p
-            className="
-            text-center
-            text-gray-500
-            mt-2
-            mb-8
-          "
-          >
-            Join LuxeCommerce for premium shopping
-          </p>
-
-          <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+      <div className=" min-h-[calc(100vh-64px)] bg-gray-50 flex justify-center items-center px-4 py-4" >
+        <div  className=" bg-white rounded-xl shadow-md p-8 w-full max-w-md">
+          <h1 className="text-4xl font-bold text-center">Create an Account</h1>
+          <p className="  text-center  text-gray-500 mt-2 mb-8"> Join LuxeCommerce for premium shopping </p>
+          <form className="p-3" onSubmit={handleSubmit(onSubmit)}>
             <Input label="Full Name"
             error={errors.name?.message}
             {...register("name")} />
@@ -79,11 +48,6 @@ const Register = () => {
               error={errors.email?.message}
               {...register("email")}
             />
-{/* 
-            <Input label="Mobile Number"
-             error={errors.mobile?.message}
-             {...register("mobile")} /> */}
-
             <Input
               label="Password"
               type="password"

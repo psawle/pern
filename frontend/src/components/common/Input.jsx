@@ -5,7 +5,7 @@ const Input = ({
     ...props
   }) => {
     return (
-      <div className="space-y-1">
+      <div className="space-y-1 px-2">
         {label && (
           <label className="text-sm font-medium">
             {label}

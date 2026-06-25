@@ -24,6 +24,6 @@ export const loginUser = (user) => async (dispatch,getState) => {
        console.log("ressss",res)
        return res;
    } catch (error) {
-       
+       console.log("error in login",error)
    }
 }
