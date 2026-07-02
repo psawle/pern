@@ -1,6 +1,6 @@
 import instance from "./axios";
 
-export const registerUser = async () => {
+export const registerUser = async (user) => {
     try {
         const res = await instance.post("/users",user);
         console.log("response : ",res)
